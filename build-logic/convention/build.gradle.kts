@@ -18,5 +18,9 @@ gradlePlugin {
             id = "todolist.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "todolist.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
     }
 }
