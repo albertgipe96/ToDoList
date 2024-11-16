@@ -1,14 +1,13 @@
 plugins {
-    alias(libs.plugins.todolist.android.library)
+    alias(libs.plugins.todolist.android.library.compose)
 }
 
 android {
-    namespace = "com.development.tasks.data"
+    namespace = "com.development.core.ui"
 }
 
 dependencies {
-    implementation(projects.tasks.domain)
-    implementation(projects.core.storage)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

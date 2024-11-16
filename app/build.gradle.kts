@@ -12,6 +12,10 @@ android {
 
 dependencies {
     implementation(projects.tasks.data)
+    implementation(projects.tasks.domain)
+    implementation(projects.tasks.ui)
+    implementation(projects.core.storage)
+    implementation(projects.core.ui)
 
     // Core
     implementation(libs.androidx.core.ktx)

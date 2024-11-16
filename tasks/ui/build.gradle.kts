@@ -7,6 +7,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.tasks.domain)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

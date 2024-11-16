@@ -76,3 +76,4 @@ todolist-android-library = { id = "todolist.android.library", version = "unspeci
 todolist-android-library-compose = { id = "todolist.android.library.compose", version = "unspecified" }
 todolist-jvm-library = { id = "todolist.jvm.library", version = "unspecified" }
 todolist-room = { id = "todolist.room", version = "unspecified" }
+android-library = { id = "com.android.library", version.ref = "agp" }
