@@ -62,3 +62,5 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 todolist-android-application = { id = "todolist.android.application", version = "unspecified" }
 todolist-android-library = { id = "todolist.android.library", version = "unspecified" }
 todolist-android-library-compose = { id = "todolist.android.library.compose", version = "unspecified" }
+todolist-jvm-library = { id = "todolist.jvm.library", version = "unspecified" }
+

@@ -25,3 +25,4 @@ rootProject.name = "ToDoList"
 include(":app")
 include(":tasks:data")
 include(":tasks:ui")
+include(":tasks:domain")

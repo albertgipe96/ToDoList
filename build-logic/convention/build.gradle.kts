@@ -26,5 +26,9 @@ gradlePlugin {
             id = "todolist.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
+        register("jvmLibrary") {
+            id = "todolist.jvm.library"
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
     }
 }
