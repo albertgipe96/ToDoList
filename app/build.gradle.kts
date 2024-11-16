@@ -17,6 +17,12 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
+    // Hilt
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
+    //Hilt Navigation Compose
+    implementation(libs.hilt.navigation.compose)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
