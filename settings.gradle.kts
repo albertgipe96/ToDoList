@@ -24,3 +24,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "ToDoList"
 include(":app")
 include(":tasks:data")
+include(":tasks:ui")
