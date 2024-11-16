@@ -30,5 +30,9 @@ gradlePlugin {
             id = "todolist.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
+        register("room") {
+            id = "todolist.room"
+            implementationClass = "RoomConventionPlugin"
+        }
     }
 }
