@@ -17,7 +17,9 @@ coroutines = "1.8.0"
 composeCompiler = "1.5.9"
 devtoolsKsp = "2.0.20-1.0.24"
 hiltAndroid = "2.52"
-navigationCompose = "1.2.0"
+hiltNavigationCompose = "1.2.0"
+navigationCompose = "2.8.3"
+serializationJson = "1.7.3"
 
 # Project versions
 projectApplicationId = "com.development.todolist"
@@ -46,12 +48,14 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines"}
-hilt = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "navigationCompose" }
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serializationJson" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 
 # Gradle
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
@@ -70,10 +74,10 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devtoolsKsp" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
 room = { id = "androidx.room", version.ref = "room" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 todolist-android-application = { id = "todolist.android.application", version = "unspecified" }
 todolist-android-library = { id = "todolist.android.library", version = "unspecified" }
 todolist-android-library-compose = { id = "todolist.android.library.compose", version = "unspecified" }
 todolist-jvm-library = { id = "todolist.jvm.library", version = "unspecified" }
 todolist-room = { id = "todolist.room", version = "unspecified" }
-android-library = { id = "com.android.library", version.ref = "agp" }

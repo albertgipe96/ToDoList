@@ -27,6 +27,12 @@ dependencies {
     //Hilt Navigation Compose
     implementation(libs.hilt.navigation.compose)
 
+    // Serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)

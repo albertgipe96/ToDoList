@@ -3,6 +3,7 @@ import com.development.buildlogic.convention.ExtensionType
 import com.development.buildlogic.convention.configureAndroidCompose
 import com.development.buildlogic.convention.configureBuildTypes
 import com.development.buildlogic.convention.configureKotlinAndroid
+import com.development.buildlogic.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -16,6 +17,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("com.android.library")
                 apply("org.jetbrains.kotlin.android")
                 apply("org.jetbrains.kotlin.plugin.compose")
+                apply("com.google.devtools.ksp")
+                apply("com.google.dagger.hilt.android")
             }
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
@@ -28,6 +31,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 }
 
                 dependencies {
+                    "implementation"(libs.findLibrary("hilt").get())
+                    "ksp"(libs.findLibrary("hilt.compiler").get())
+                    "implementation"(libs.findLibrary("hilt.navigation.compose").get())
                     "testImplementation"(kotlin("test"))
                 }
             }
