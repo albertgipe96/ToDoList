@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.development.tasks.ui.api.ToDoListScreen
 import com.development.todolist.navigation.NavRoute.List
 import com.development.todolist.navigation.NavRoute.Detail
 import com.development.todolist.navigation.NavRoute.AddTask
@@ -16,7 +17,11 @@ fun NavigationWrapper() {
         startDestination = List
     ) {
         composable<List> {
-
+            ToDoListScreen(
+                onNavigateToDetail = { taskId ->
+                    navController.navigate(Detail(taskId))
+                }
+            )
         }
         composable<Detail> {
 
