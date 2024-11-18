@@ -5,10 +5,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.development.tasks.ui.api.AddTaskScreen
+import com.development.tasks.ui.api.TaskDetailScreen
 import com.development.tasks.ui.api.ToDoListScreen
-import com.development.todolist.navigation.NavRoute.List
-import com.development.todolist.navigation.NavRoute.Detail
-import com.development.todolist.navigation.NavRoute.AddTask
+import com.development.core.navigation.NavRoute.List
+import com.development.core.navigation.NavRoute.Detail
+import com.development.core.navigation.NavRoute.AddTask
 
 @Composable
 fun NavigationWrapper() {
@@ -28,11 +29,18 @@ fun NavigationWrapper() {
             )
         }
         composable<Detail> {
-
+            TaskDetailScreen(
+                onNavigateBack = {
+                    navController.navigateUp()
+                }
+            )
         }
         composable<AddTask> {
             AddTaskScreen(
                 onProcessFinished = {
+                    navController.navigateUp()
+                },
+                onNavigateBack = {
                     navController.navigateUp()
                 }
             )

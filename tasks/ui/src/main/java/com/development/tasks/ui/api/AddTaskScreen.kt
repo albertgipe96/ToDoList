@@ -6,9 +6,11 @@ import com.development.tasks.ui.internal.list.ToDoListScreenInternal
 
 @Composable
 fun AddTaskScreen(
-    onProcessFinished: () -> Unit
+    onProcessFinished: () -> Unit,
+    onNavigateBack: () -> Unit
 ) {
     AddTaskScreenInternal(
-        onProcessFinished = onProcessFinished
+        onProcessFinished = onProcessFinished,
+        onNavigateBack = onNavigateBack
     )
 }

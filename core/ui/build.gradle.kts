@@ -8,6 +8,9 @@ android {
 
 dependencies {
 
+    // Serialization
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)

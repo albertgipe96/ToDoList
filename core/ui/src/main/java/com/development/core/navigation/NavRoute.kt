@@ -1,4 +1,4 @@
-package com.development.todolist.navigation
+package com.development.core.navigation
 
 import kotlinx.serialization.Serializable
 
