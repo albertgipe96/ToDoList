@@ -15,7 +15,7 @@ inline fun <T, E: Error, R> Result<T, E>.map(map: (T) -> R): Result<R, E> {
 
 typealias EmptyDataResult<E> = Result<Unit, E>
 
-fun <T: Any, E: Error> Result<T, E>.onSuccess(
+inline fun <T: Any, E: Error> Result<T, E>.onSuccess(
     executable: (T) -> Unit
 ): Result<T, E> = apply {
     if (this is Result.Success<T>) {
@@ -23,7 +23,7 @@ fun <T: Any, E: Error> Result<T, E>.onSuccess(
     }
 }
 
-fun <T: Any, E: Error> Result<T, E>.onError(
+inline fun <T: Any, E: Error> Result<T, E>.onError(
     executable: (error: E) -> Unit
 ): Result<T, E> = apply {
     if (this is Result.Error) {

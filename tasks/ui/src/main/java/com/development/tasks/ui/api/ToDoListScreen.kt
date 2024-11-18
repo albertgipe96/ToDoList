@@ -5,9 +5,11 @@ import com.development.tasks.ui.internal.list.ToDoListScreenInternal
 
 @Composable
 fun ToDoListScreen(
-    onNavigateToDetail: (Int) -> Unit
+    onNavigateToDetail: (Int) -> Unit,
+    onNavigateToAddTask: () -> Unit
 ) {
     ToDoListScreenInternal(
-        onNavigateToDetail = onNavigateToDetail
+        onNavigateToDetail = onNavigateToDetail,
+        onNavigateToAddTask = onNavigateToAddTask
     )
 }
