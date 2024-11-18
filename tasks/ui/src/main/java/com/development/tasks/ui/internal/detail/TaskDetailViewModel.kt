@@ -13,7 +13,7 @@ import com.development.core.domain.result.DataError
 import com.development.core.domain.result.onError
 import com.development.core.domain.result.onSuccess
 import com.development.core.navigation.NavRoute
-import com.development.tasks.domain.TaskRepository
+import com.development.tasks.domain.usecases.GetTaskById
 import com.development.tasks.domain.usecases.MarkTaskAsCompleted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -38,7 +38,7 @@ internal sealed interface TaskDetailAction {
 @Stable
 internal class TaskDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val taskRepository: TaskRepository,
+    private val getTaskById: GetTaskById,
     private val markTaskAsCompleted: MarkTaskAsCompleted
 ) : ViewModel() {
 
@@ -59,7 +59,7 @@ internal class TaskDetailViewModel @Inject constructor(
 
     private fun loadTaskDetailData() {
         viewModelScope.launch {
-            taskRepository.getTask(taskId)
+            getTaskById(taskId)
                 .onSuccess { task ->
                     uiState = uiState.copy(
                         loading = false,

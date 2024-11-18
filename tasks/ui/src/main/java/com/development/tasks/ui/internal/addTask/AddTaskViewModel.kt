@@ -10,7 +10,7 @@ import com.development.core.domain.model.Task
 import com.development.core.domain.result.DataError
 import com.development.core.domain.result.onError
 import com.development.core.domain.result.onSuccess
-import com.development.tasks.domain.TaskRepository
+import com.development.tasks.domain.usecases.StoreNewTask
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -37,7 +37,7 @@ sealed interface AddTaskEvent {
 @HiltViewModel
 @Stable
 internal class AddTaskViewModel @Inject constructor(
-    private val taskRepository: TaskRepository
+    private val storeNewTask: StoreNewTask
 ) : ViewModel() {
 
     var uiState by mutableStateOf(AddTaskUiState())
@@ -69,7 +69,7 @@ internal class AddTaskViewModel @Inject constructor(
     private fun saveTask() {
         viewModelScope.launch {
             uiState = uiState.copy(loading = true)
-            taskRepository.storeTask(uiState.task)
+            storeNewTask(uiState.task)
                 .onSuccess {
                     eventChannel.send(AddTaskEvent.OnProcessFinishedCorrectly)
                     uiState = uiState.copy(loading = false)

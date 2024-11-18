@@ -11,6 +11,7 @@ import com.development.core.domain.result.DataError
 import com.development.core.domain.result.onError
 import com.development.core.domain.result.onSuccess
 import com.development.tasks.domain.TaskRepository
+import com.development.tasks.domain.usecases.GetAllTasks
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,7 +25,7 @@ internal data class ToDoListUiState(
 @HiltViewModel
 @Stable
 internal class ToDoListViewModel @Inject constructor(
-    private val taskRepository: TaskRepository
+    private val getAllTasks: GetAllTasks
 ) : ViewModel() {
 
     var uiState by mutableStateOf(ToDoListUiState())
@@ -36,7 +37,7 @@ internal class ToDoListViewModel @Inject constructor(
 
     private fun loadTasksData() {
         viewModelScope.launch {
-            taskRepository.getAllTasks()
+            getAllTasks()
                 .onSuccess { tasks ->
                     uiState = uiState.copy(
                         loading = false,
