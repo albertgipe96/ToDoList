@@ -20,6 +20,7 @@ hiltAndroid = "2.52"
 hiltNavigationCompose = "1.2.0"
 navigationCompose = "2.8.3"
 serializationJson = "1.7.3"
+javaInjectVersion = "1"
 
 # Project versions
 projectApplicationId = "com.development.todolist"
@@ -56,6 +57,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serializationJson" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javaInjectVersion" }
 
 # Gradle
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

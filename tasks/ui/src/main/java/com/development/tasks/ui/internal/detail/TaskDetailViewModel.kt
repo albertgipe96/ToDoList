@@ -14,6 +14,7 @@ import com.development.core.domain.result.onError
 import com.development.core.domain.result.onSuccess
 import com.development.core.navigation.NavRoute
 import com.development.tasks.domain.TaskRepository
+import com.development.tasks.domain.usecases.MarkTaskAsCompleted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,13 +30,16 @@ internal sealed interface TaskState {
     data class Error(val error: DataError) : TaskState
 }
 
-
+internal sealed interface TaskDetailAction {
+    data class MarkAsCompleted(val task: Task) : TaskDetailAction
+}
 
 @HiltViewModel
 @Stable
 internal class TaskDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository,
+    private val markTaskAsCompleted: MarkTaskAsCompleted
 ) : ViewModel() {
 
     private val taskId: Int = savedStateHandle.toRoute<NavRoute.Detail>().taskId
@@ -47,8 +51,10 @@ internal class TaskDetailViewModel @Inject constructor(
         loadTaskDetailData()
     }
 
-    fun onAction() {
-
+    fun onAction(action: TaskDetailAction) {
+        when (action) {
+            is TaskDetailAction.MarkAsCompleted -> handleMarkAsCompleted(action.task)
+        }
     }
 
     private fun loadTaskDetailData() {
@@ -58,6 +64,24 @@ internal class TaskDetailViewModel @Inject constructor(
                     uiState = uiState.copy(
                         loading = false,
                         detailState = TaskState.TaskLoaded(task)
+                    )
+                }
+                .onError { error ->
+                    uiState = uiState.copy(
+                        loading = false,
+                        detailState = TaskState.Error(error)
+                    )
+                }
+        }
+    }
+
+    private fun handleMarkAsCompleted(task: Task) {
+        viewModelScope.launch {
+            markTaskAsCompleted(task)
+                .onSuccess { taskUpdated ->
+                    uiState = uiState.copy(
+                        loading = false,
+                        detailState = TaskState.TaskLoaded(taskUpdated)
                     )
                 }
                 .onError { error ->
