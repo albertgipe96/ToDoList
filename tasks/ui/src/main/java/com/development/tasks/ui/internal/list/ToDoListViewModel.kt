@@ -13,13 +13,13 @@ import com.development.core.domain.result.onSuccess
 import com.development.tasks.domain.TaskRepository
 import com.development.tasks.domain.usecases.GetAllTasks
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal data class ToDoListUiState(
     val loading: Boolean = true,
-    val tasks: List<Task> = emptyList(),
-    val error: DataError? = null
+    val tasks: List<Task> = emptyList()
 )
 
 @HiltViewModel
@@ -37,19 +37,12 @@ internal class ToDoListViewModel @Inject constructor(
 
     private fun loadTasksData() {
         viewModelScope.launch {
-            getAllTasks()
-                .onSuccess { tasks ->
-                    uiState = uiState.copy(
-                        loading = false,
-                        tasks = tasks
-                    )
-                }
-                .onError { error ->
-                    uiState = uiState.copy(
-                        loading = false,
-                        error = error
-                    )
-                }
+            getAllTasks().collect { tasks ->
+                uiState = uiState.copy(
+                    loading = false,
+                    tasks = tasks
+                )
+            }
         }
     }
 

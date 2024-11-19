@@ -6,19 +6,16 @@ import com.development.core.domain.result.Result
 import com.development.core.domain.model.Task
 import com.development.core.storage.dao.TaskDao
 import com.development.core.storage.model.TaskEntity
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 internal class RoomLocalTaskDataSource @Inject constructor(
     private val taskDao: TaskDao
 ) : LocalTaskDataSource {
 
-    override suspend fun getAllTasks(): Result<List<Task>, DataError> {
-        return try {
-            val tasks = taskDao.getTaskList().map { it.toTask() }
-            Result.Success(tasks)
-        } catch (e: Exception) {
-            Result.Error(DataError.Local.NOT_FOUND)
-        }
+    override suspend fun getAllTasks(): Flow<List<Task>> {
+        return taskDao.getTaskList().map { it.map { it.toTask() } }
     }
 
     override suspend fun getTask(id: Int): Result<Task, DataError> {

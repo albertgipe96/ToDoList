@@ -6,7 +6,7 @@ import com.development.core.domain.model.Task
 
 @Entity(tableName = "tasks")
 data class TaskEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey val id: Int,
     val title: String,
     val description: String,
     val isDone: Boolean
