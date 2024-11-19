@@ -2,17 +2,23 @@
 
 package com.development.tasks.ui.internal.detail
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -22,6 +28,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -49,7 +56,15 @@ internal fun TaskDetailScreenInternal(
             )
         }
     ) { innerPadding ->
-        Column(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
             when (val detailState = uiState.detailState) {
                 TaskState.Idle -> {}
                 is TaskState.Error -> {
@@ -57,7 +72,7 @@ internal fun TaskDetailScreenInternal(
                 }
                 is TaskState.TaskLoaded -> {
                     Column(
-                        modifier = Modifier.weight(1F, false)
+                        modifier = Modifier.fillMaxWidth().weight(1F, false)
                     ) {
                         Text(
                             text = detailState.task.title,
@@ -71,7 +86,11 @@ internal fun TaskDetailScreenInternal(
                     }
                     Button(
                         enabled = !detailState.task.isDone,
-                        onClick = { viewModel.onAction(TaskDetailAction.MarkAsCompleted(detailState.task)) }
+                        onClick = { viewModel.onAction(TaskDetailAction.MarkAsCompleted(detailState.task)) },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Black,
+                            contentColor = Color.White
+                        )
                     ) {
                         Text(text = if (!detailState.task.isDone) "MARK AS COMPLETED" else "COMPLETED")
                     }

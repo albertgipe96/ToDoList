@@ -22,7 +22,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.development.tasks.ui.internal.list.components.TaskCard
 
 @Composable
 internal fun ToDoListScreenInternal(
@@ -47,16 +49,21 @@ internal fun ToDoListScreenInternal(
         }
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize().padding(innerPadding)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp)
         ) {
             items(uiState.tasks) { task ->
-                Card(
-                    modifier = Modifier.fillMaxWidth().clickable { onNavigateToDetail(task.id) }
-                ) {
-                    Text(text = task.title)
-                    Text(text = task.description)
-                    Text(text = task.isDone.toString())
-                }
+                TaskCard(
+                    title = task.title,
+                    description = task.description,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onNavigateToDetail(task.id) }
+                        .padding(vertical = 4.dp),
+                    isDone = task.isDone
+                )
             }
         }
         if (uiState.loading) {
