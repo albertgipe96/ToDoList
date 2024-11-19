@@ -31,9 +31,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.development.core.ui.ObserveAsEvents
+import com.development.tasks.ui.R
 
 @Composable
 internal fun AddTaskScreenInternal(
@@ -45,10 +47,10 @@ internal fun AddTaskScreenInternal(
     ObserveAsEvents(viewModel.eventsFlow) { event ->
         when (event) {
             is AddTaskEvent.OnProcessError -> {
-                Toast.makeText(context, "ADDING TASK FAILED WITH ERROR: ${event.error}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, context.getString(R.string.adding_task_failed_with_error_toast, event.error), Toast.LENGTH_LONG).show()
             }
             AddTaskEvent.OnProcessFinishedCorrectly -> {
-                Toast.makeText(context, "TASK ADDED CORRECTLY", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, context.getString(R.string.task_added_correctly_toast), Toast.LENGTH_LONG).show()
                 onProcessFinished()
             }
         }
@@ -59,12 +61,12 @@ internal fun AddTaskScreenInternal(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(text = "Add task") },
+                title = { Text(text = stringResource(R.string.add_task_screen_title)) },
                 navigationIcon = {
                     Icon(
                         modifier = Modifier.clickable { onNavigateBack() },
                         painter = rememberVectorPainter(Icons.AutoMirrored.Filled.ArrowBack),
-                        contentDescription = "Navigate back"
+                        contentDescription = stringResource(R.string.add_task_navigate_back_content_description)
                     )
                 }
             )
@@ -79,7 +81,9 @@ internal fun AddTaskScreenInternal(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Column(modifier = Modifier.fillMaxWidth().weight(1F, false)) {
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .weight(1F, false)) {
                 TextField(
                     value = uiState.task.title,
                     onValueChange = { newValue ->
@@ -87,7 +91,7 @@ internal fun AddTaskScreenInternal(
                     },
                     modifier = Modifier.fillMaxWidth(),
                     label = {
-                        Text(text = "Title")
+                        Text(text = stringResource(R.string.add_task_text_field_title_label))
                     }
                 )
                 Spacer(Modifier.height(16.dp))
@@ -98,7 +102,7 @@ internal fun AddTaskScreenInternal(
                     },
                     modifier = Modifier.fillMaxWidth(),
                     label = {
-                        Text(text = "Description")
+                        Text(text = stringResource(R.string.add_task_text_field_description_label))
                     }
                 )
             }
@@ -107,7 +111,7 @@ internal fun AddTaskScreenInternal(
                 enabled = !uiState.loading && uiState.task.title.isNotEmpty(),
                 onClick = { viewModel.onAction(AddTaskAction.OnSaveTask) }
             ) {
-                Text(text = "SAVE TASK")
+                Text(text = stringResource(R.string.add_task_save_task_button))
             }
         }
         if (uiState.loading) {

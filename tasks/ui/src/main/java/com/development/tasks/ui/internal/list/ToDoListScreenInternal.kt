@@ -22,8 +22,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.development.tasks.ui.R
 import com.development.tasks.ui.internal.list.components.TaskCard
 
 @Composable
@@ -37,12 +39,12 @@ internal fun ToDoListScreenInternal(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(text = "Tasks") },
+                title = { Text(text = stringResource(R.string.to_do_list_screen_title)) },
                 actions = {
                     Icon(
                         modifier = Modifier.clickable { onNavigateToAddTask() },
                         painter = rememberVectorPainter(Icons.Default.Add),
-                        contentDescription = "Add task"
+                        contentDescription = stringResource(R.string.to_do_list_add_task_icon_content_description)
                     )
                 }
             )

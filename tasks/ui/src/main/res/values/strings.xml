@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_task_text_field_title_label">Title</string>
+    <string name="add_task_text_field_description_label">Description</string>
+    <string name="add_task_save_task_button">SAVE TASK</string>
+    <string name="add_task_screen_title">Add task</string>
+    <string name="add_task_navigate_back_content_description">Navigate back</string>
+    <string name="adding_task_failed_with_error_toast">ADDING TASK FAILED WITH ERROR: %1$s</string>
+    <string name="task_added_correctly_toast">TASK ADDED CORRECTLY</string>
+    <string name="to_do_list_screen_title">Tasks</string>
+    <string name="to_do_list_add_task_icon_content_description">Add task</string>
+    <string name="mark_as_completed_button">MARK AS COMPLETED</string>
+    <string name="completed_button">COMPLETED</string>
+    <string name="task_detail_screen_title">Task detail</string>
+    <string name="navigate_back_icon_content_description">Navigate back</string>
+</resources>

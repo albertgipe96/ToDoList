@@ -30,10 +30,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.development.tasks.ui.R
 
 @Composable
 internal fun TaskDetailScreenInternal(
@@ -45,12 +47,12 @@ internal fun TaskDetailScreenInternal(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(text = "Task detail") },
+                title = { Text(text = stringResource(R.string.task_detail_screen_title)) },
                 navigationIcon = {
                     Icon(
                         modifier = Modifier.clickable { onNavigateBack() },
                         painter = rememberVectorPainter(Icons.AutoMirrored.Filled.ArrowBack),
-                        contentDescription = "Navigate back"
+                        contentDescription = stringResource(R.string.navigate_back_icon_content_description)
                     )
                 }
             )
@@ -72,7 +74,9 @@ internal fun TaskDetailScreenInternal(
                 }
                 is TaskState.TaskLoaded -> {
                     Column(
-                        modifier = Modifier.fillMaxWidth().weight(1F, false)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1F, false)
                     ) {
                         Text(
                             text = detailState.task.title,
@@ -92,7 +96,11 @@ internal fun TaskDetailScreenInternal(
                             contentColor = Color.White
                         )
                     ) {
-                        Text(text = if (!detailState.task.isDone) "MARK AS COMPLETED" else "COMPLETED")
+                        Text(
+                            text = if (!detailState.task.isDone) {
+                                stringResource(R.string.mark_as_completed_button)
+                            } else stringResource(R.string.completed_button)
+                        )
                     }
                 }
             }
